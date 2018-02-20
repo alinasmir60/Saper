@@ -13,6 +13,7 @@ def start_screen(width=400, height=400):
     screen = pygame.display.set_mode(size)    
     font = pygame.font.Font(None, 30)
     textCoord = 10
+    fon.empty()
     fon2 = pygame.sprite.Sprite()
     fon2.image = load_image("start.png")
     fon2.rect = fon2.image.get_rect()
@@ -53,6 +54,7 @@ def end_screen(end=0, width=400, height=400):
     if end == 1:
         gui.add_element(Label((40, 0, 110, 60), "ПОЗДРАВЛЯЕМ!"))
         gui.add_element(Label((40, 40, 110, 60), "ВЫ ВЫИГРАЛИ!"))
+    fon.empty()
     fon1 = pygame.sprite.Sprite()
     fon1.image = load_image("fon.png")
     fon1.rect = fon1.image.get_rect()
@@ -138,20 +140,20 @@ class Board:
         for h in range(self.height):
             for w in range(self.width):
                 if self.board[w][h] == 0:
-                    pygame.draw.rect(screen, (155, 155, 155), 
+                    pygame.draw.rect(screen, (170, 170, 170), 
                                      (self.left + self.cell_size * w + 1,
                                       self.top + self.cell_size * h + 1, 
                                       self.cell_size - 2, self.cell_size - 2))
                 if self.board[w][h] == -2 or self.board[w][h] == -20:
                     mine_img.image = pygame.transform.scale(load_image("flag.jpg"), (20, 20))
                     mine_img.rect = mine_img.image.get_rect()
-                    mine_img.rect.x = self.left + self.cell_size * w + 1
-                    mine_img.rect.y = self.top + self.cell_size * h + 1
+                    mine_img.rect.x = self.left + self.cell_size * w
+                    mine_img.rect.y = self.top + self.cell_size * h
                     mines.add(mine_img)
                     mines.draw(screen)
                     mines.update()
                 if self.board[w][h] != 10 and self.board[w][h] != -1 and self.board[w][h] != 0 and self.board[w][h] != -2 and self.board[w][h] != -20:
-                    pygame.draw.rect(screen, (155, 155, 155), 
+                    pygame.draw.rect(screen, (170, 170, 170), 
                                      (self.left + self.cell_size * w + 1,
                                       self.top + self.cell_size * h + 1, 
                                       self.cell_size - 2, self.cell_size - 2))                    
