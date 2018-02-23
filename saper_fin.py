@@ -221,6 +221,12 @@ class Minesweeper(Board):
     def get_top_left(self):
         return self.top, self.left
     
+    def get_width_height(self):
+        return self.width, self.height
+    
+    def get_cell_size(self):
+        return self.cell_size
+    
     def mines(self, x, y):
         kol_mine = 0
         for i in range(-1, 2):
@@ -386,6 +392,10 @@ def game(typ):
     active = True
     types = [Minesweeper(9, 9, 10), Minesweeper(13, 13, 40), Minesweeper(19, 19, 80)]
     minesweeper = types[typ]
+    top, left = minesweeper.get_top_left()
+    width, height = minesweeper.get_width_height()
+    size = width, height = left * 2 + width * minesweeper.get_cell_size(), top * 2 + height * minesweeper.get_cell_size()
+    screen = pygame.display.set_mode(size)
     fon2 = pygame.sprite.Sprite()
     fon2.image = load_image("start.png")
     fon2.rect = fon2.image.get_rect()
